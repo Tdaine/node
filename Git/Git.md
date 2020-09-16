@@ -18,3 +18,4 @@ git stash -p    //保存想要保存的文件
 git reset --hard 版本   //回退到某个版本
 git stash pop   //将保存的文件取出
 ```
+
