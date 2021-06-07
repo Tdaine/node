@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sticky</title>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+  var el = new Vue({
+    el: '#app',
+    data() {
+      return {
+        tableData: [{
+          projectManager: "吴卓恒", //项目经理
+          project: "MAXHUB PC 5.9.0公版",  //交付项目
+          startDate: "2021-4-1", //立项时间
+          expectDate: "2021-4-30",  //预计定版时间
+          actualDate: "2021-4-25", //实际定版时间
+          complete: "是", //是否按期达成
+          aheadAmount: "-5",  //提前量（滞后量）
+          aheadPercentage: "-16.70%",  //提前百分比（滞后百分比）
+          difficulty: "B", //项目难度
+          score: "4",  //本项得分
+        }, {
+          //...
+        }, {
+          //...
+        }, {
+          result: "个人项目达成率：66.7%，汇总得分：4",
+        }, {
+          projectManager: "林伦峰", //项目经理
+          project: "MAXHUB PC 5.9.0公版",  //交付项目
+          startDate: "2021-4-1", //立项时间
+          expectDate: "2021-4-30",  //预计定版时间
+          actualDate: "2021-4-25", //实际定版时间
+          complete: "是", //是否按期达成
+          aheadAmount: "15",  //提前量（滞后量）
+          aheadPercentage: "50.00%",  //提前百分比（滞后百分比）
+          difficulty: "B", //项目难度
+          score: "-2",  //本项得分
+        }, {
+          //...
+        }, {
+          result: "个人项目达成率：66.7%，汇总得分：4",
+        },]
+      };
+    },
+    methods: {
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        console.log({ row, column, rowIndex, columnIndex });
+        if (row.hasOwnProperty("result")) {
+          if (columnIndex === 0) {
+            row["projectManager"] = row.result;
+            return [1, 10];
+          } 
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>

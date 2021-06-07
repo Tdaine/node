@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合并列</title>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+  <div id="app">
+    <el-table
+      :data="tableData"
+      :span-method="arraySpanMethod"
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="projectManager"
+        label="项目经理"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="project"
+        label="交付项目">
+      </el-table-column>
+      <el-table-column
+        prop="startDate"
+        sortable
+        label="立项时间">
+      </el-table-column>
+      <el-table-column
+        prop="expectDate"
+        sortable
+        label="预计定版时间">
+      </el-table-column>
+      <el-table-column
+        prop="actualDate"
+        sortable
+        label="实际定版时间">
+        <el-table-column
+        prop="complete"
+        sortable
+        label="是否按期达成">
+      </el-table-column>
+      <el-table-column
+        prop="aheadAmount"
+        sortable
+        label="提前量（滞后量）">
+        <el-table-column
+        prop="aheadPercentage"
+        sortable
+        label="提前百分比（滞后百分比）">
+      </el-table-column>
+      <el-table-column
+        prop="difficulty"
+        sortable
+        label="项目难度">
+        <el-table-column
+        prop="score"
+        sortable
+        label="本项得分">
+      </el-table-column>
+    </el-table>
+<!-- 
+    <el-table
+      :data="tableData"
+      :span-method="objectSpanMethod"
+      border
+      style="width: 100%; margin-top: 20px">
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名">
+      </el-table-column>
+      <el-table-column
+        prop="amount1"
+        label="数值 1（元）">
+      </el-table-column>
+      <el-table-column
+        prop="amount2"
+        label="数值 2（元）">
+      </el-table-column>
+      <el-table-column
+        prop="amount3"
+        label="数值 3（元）">
+      </el-table-column>
+    </el-table> -->
+  </div>
+</template>
+<script>
+  var el = new Vue({
+    el: '#app',
+    data() {
+      return {
+        tableData: [{
+          projectManager: "吴卓恒", //项目经理
+          project: "MAXHUB PC 5.9.0公版",  //交付项目
+          startDate: "2021-4-1", //立项时间
+          expectDate: "2021-4-30",  //预计定版时间
+          actualDate: "2021-4-25", //实际定版时间
+          complete: "是", //是否按期达成
+          aheadAmount: "-5",  //提前量（滞后量）
+          aheadPercentage: "-16.70%",  //提前百分比（滞后百分比）
+          difficulty: "", //项目难度
+          score: "",  //本项得分
+        }, {
+          id: '12987123',
+          name: '王小虎',
+          amount1: '165',
+          amount2: '4.43',
+          amount3: 12
+        }, {
+          rate: "个人达成率：，汇总得分：",
+          // id: "个人达成率：，汇总得分："
+        }, {
+          id: '12987125',
+          name: '王小虎',
+          amount1: '621',
+          amount2: '2.2',
+          amount3: 17
+        }, {
+          id: '12987126',
+          name: '王小虎',
+          amount1: '539',
+          amount2: '4.1',
+          amount3: 15
+        }, {
+          rate: "个人达成率：，汇总得分：",
+        },]
+      };
+    },
+    methods: {
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        console.log({ row, column, rowIndex, columnIndex });
+        if (row.hasOwnProperty("rate")) {
+          if (columnIndex === 0) {
+            row["id"] = row.rate;
+            return [1, 5];
+          } 
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>
